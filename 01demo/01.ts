@@ -294,7 +294,7 @@ class Person3 {
       this.name = name
    }
    run():string {
-        return `${this.name} is run`
+        return `${this.name} is run 父类`
    }
 }
 
@@ -303,12 +303,15 @@ console.log('p3.getName()', p3.getName());
 p3.setName('李四')
 console.log('p3 setName .getName()', p3.getName()); 
 
-// ts中的继承 extends super
+// ts中的继承 extends super  , 如果子类和父类有相同的属性和方法, 优先使用子类里面的
  
 class Web3 extends Person3{
     constructor(name:string) {
         super(name) // 初始化父类的构造函数
     }
+    // run():string{
+    //     return `${this.name} is run 子类`
+    // }
 }
 var web_3 = new Web3('王五')
 console.log('web_3', web_3.run());

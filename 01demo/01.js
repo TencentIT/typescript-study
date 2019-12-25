@@ -235,7 +235,7 @@ var Person3 = /** @class */ (function () {
         this.name = name;
     };
     Person3.prototype.run = function () {
-        return this.name + " is run";
+        return this.name + " is run \u7236\u7C7B";
     };
     return Person3;
 }());
@@ -247,7 +247,7 @@ console.log('p3 setName .getName()', p3.getName());
 var Web3 = /** @class */ (function (_super) {
     __extends(Web3, _super);
     function Web3(name) {
-        return _super.call(this, name) || this;
+        return _super.call(this, name) || this; // 初始化父类的构造函数
     }
     return Web3;
 }(Person3));
