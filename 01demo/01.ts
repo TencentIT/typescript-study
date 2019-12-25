@@ -315,3 +315,12 @@ class Web3 extends Person3{
 }
 var web_3 = new Web3('王五')
 console.log('web_3', web_3.run());
+
+
+// 类里面的修饰符 
+// typescript 里面定义属性的时候给我们提供了三种修饰符
+/*
+    public    公有      在类里面 子类 类外都可以访问
+    protected 保护类型   在类里面 子类 里面都可以访问 类外无法访问
+    private   私有类型   在类里面可以访问  子类 类外都无法访问
+*/
