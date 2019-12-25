@@ -1,3 +1,16 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var num = 123;
 num = 9999;
 console.log(num);
@@ -170,17 +183,17 @@ function Person() {
     this.name = 'damon'; // 属性
     this.age = 20;
     this.run = function () {
-        alert('Damon is run ');
+        console.log('Damon is run ');
     };
 }
 // 静态方法
 Person.fetchInfo = function () {
-    alert('我是静态方法');
+    console.log('我是静态方法');
 };
 // 原型链上面的属性会被多个实例共享，构造函数不会
 Person.prototype.sex = 'nan';
 Person.prototype.work = function () {
-    alert('Damon is work');
+    console.log('Damon is work');
 };
 var p1 = new Person();
 console.log(p1.name);
@@ -196,10 +209,47 @@ function Web() {
 var web1 = new Web();
 console.log(web1.name);
 // 对象冒充继承 能继承类上的属性和方法 ， 没法继承原型链上的方法 和属性
-console.log(web1.sex); // undefined 
+// console.log(web1.sex); // undefined 
 // web1.work(); // 报错 
 function Web2() {
 }
 Web2.prototype = new Person(); // 原型链实现基础
 var web2 = new Web2();
-web2.work();
+web2.work(); // 执行成功
+var p2 = {
+    name: 'damon-person2',
+    gender: 'man'
+};
+console.log('p2:', p2);
+var arr5 = [1, 2, 3, 4, 5];
+console.log('arr5', arr5);
+// ts 里面定义类
+var Person3 = /** @class */ (function () {
+    function Person3(n) {
+        this.name = n;
+    }
+    Person3.prototype.getName = function () {
+        return this.name;
+    };
+    Person3.prototype.setName = function (name) {
+        this.name = name;
+    };
+    Person3.prototype.run = function () {
+        return this.name + " is run";
+    };
+    return Person3;
+}());
+var p3 = new Person3('张三');
+console.log('p3.getName()', p3.getName());
+p3.setName('李四');
+console.log('p3 setName .getName()', p3.getName());
+// ts中的继承 extends super
+var Web3 = /** @class */ (function (_super) {
+    __extends(Web3, _super);
+    function Web3(name) {
+        return _super.call(this, name) || this;
+    }
+    return Web3;
+}(Person3));
+var web_3 = new Web3('王五');
+console.log('web_3', web_3.run());

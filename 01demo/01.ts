@@ -210,12 +210,12 @@ function Person() {
     this.name = 'damon' // 属性
     this.age = 20
     this.run = function() { /* 实例方法*/
-        alert('Damon is run ')
+        console.log('Damon is run ')
     }
 }
 // 静态方法
 Person.fetchInfo = function() {
-    alert('我是静态方法')
+    console.log('我是静态方法')
 }
 
 
@@ -223,7 +223,7 @@ Person.fetchInfo = function() {
 Person.prototype.sex = 'nan'
 
 Person.prototype.work = function(){
-    alert('Damon is work')
+    console.log('Damon is work')
 }
 
 var p1  = new Person()
@@ -255,4 +255,60 @@ web2.work() // 执行成功
 //  说明原型链实现的继承既可以实现构造函数上的属性&方法，也可以实现构造函数原型链上的属性&方法
  
 
+// 接口 interface
+// 任意属性
+// 有时候我们希望一个接口允许有任意的属性，可以使用如下方式：  
+// 使用 [propName: string] 定义了任意属性取 string 类型的值。
+// 需要注意的是，一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集：
+// 例如，当propName 的类型为 string的时候，因为age的属性为number不是 string的子集  所以编译报错
+interface Person2 {
+    name: string;
+    age? : number;
+    [propName: string]: any;
+}
+let p2: Person2 = {
+    name: 'damon-person2',
+    gender: 'man'
+}
+console.log('p2:', p2);
+
+// 用接口表示数组
+
+interface numberArray {
+    [index: number]: number
+}
+let arr5: numberArray = [1,2,3,4,5]
+console.log('arr5', arr5);
+
+// ts 里面定义类
+class Person3 {
+    name: string;
+    constructor(n:string) {
+        this.name = n
+    }
+
+   getName(): string {
+       return this.name
+   }
+   setName(name): void {
+      this.name = name
+   }
+   run():string {
+        return `${this.name} is run`
+   }
+}
+
+var p3 = new Person3('张三')
+console.log('p3.getName()', p3.getName());
+p3.setName('李四')
+console.log('p3 setName .getName()', p3.getName()); 
+
+// ts中的继承 extends super
  
+class Web3 extends Person3{
+    constructor(name:string) {
+        super(name) // 初始化父类的构造函数
+    }
+}
+var web_3 = new Web3('王五')
+console.log('web_3', web_3.run());
